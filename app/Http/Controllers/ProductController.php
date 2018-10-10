@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -13,9 +15,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data['products'] = Product::all();
+        $data['products'] = Product::with('category')->get();
+        // $data['category'] = Category::where('id', 3)->first();
+
+        
         return view('products.index', compact('data'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -23,8 +29,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $data['category'] = Category::all();
+
+        return view('products.create', compact('data'));
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -38,9 +47,11 @@ class ProductController extends Controller
             'stock'     => 'required',
             'price'     => 'required'
         ]);
-        Product::create($request->only('name', 'stock', 'price'));
+
+        Product::create($request->only('name', 'category_id','stock', 'price'));
         return redirect()->route('products.index');
     }
+
     /**
      * Display the specified resource.
      *
@@ -51,6 +62,7 @@ class ProductController extends Controller
     {
         //
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -60,8 +72,10 @@ class ProductController extends Controller
     public function edit($id)
     {
         $data['product'] = Product::find($id);
+
         return view('products.edit', compact('data'));
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -72,8 +86,10 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         Product::where('id', '=', $id)->update($request->only('name', 'stock', 'price'));
+
         return redirect()->route('products.index');
     }
+
     /**
      * Remove the specified resource from storage.
      *

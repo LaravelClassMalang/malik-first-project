@@ -37,6 +37,18 @@
                                 </div>
                             </div>
                             <div class='form-group row'>
+                                <label class='col-md-3 control-label'>Category</label>
+                                <div class='col-md-7'>
+                                    <select name="category_id" id="category" class="form-control">
+                                        
+                                        @foreach ($data['category'] as $key => $item)
+                                            <option value="{{$item->id}}" >{{$item->name}}</option>    
+                                        @endforeach
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='form-group row'>
                                 <label class='col-md-3 control-label'>Stock</label>
                                 <div class='col-md-7'>
                                     <input type='number' class='form-control' name='stock' placeholder="Stock" required value="{{ old('stock') }}">

@@ -11,9 +11,10 @@
 |
 */
 
-// Route::get('/basetemplate', function() {
+// Route::get('/', function() {
 //     return view('welcome');
 // });
+
 
 // GET
 Route::get('/users', "UserController@index")->name("users.index");
@@ -35,3 +36,5 @@ Route::middleware("localization")->group(function() {
 	Route::resource("products", "ProductController", ['except' => ['destroy'] ]);
 	Route::get('products/{products}/delete', ['as' => 'products.delete', 'uses' => 'ProductController@destroy']);
 });
+
+

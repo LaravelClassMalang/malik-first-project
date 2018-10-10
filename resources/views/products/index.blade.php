@@ -67,6 +67,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
+                                        <th>Category</th>
                                         <th>Stock</th>
                                         <th>Price</th>
                                         <th>Action</th>
@@ -77,6 +78,7 @@
                                         <tr>
                                             <td></td>
                                             <td>{{ $product->name }}</td>
+                                            <td>{{ $product->category->name ?? '-' }}</td>
                                             <td>{{ $product->stock }}</td>
                                             <td>{{ $product->price }}</td>
                                             <td class="text-center">
