@@ -2,13 +2,13 @@
 
 @section('page-title')
 <h1>
-    <i class="fa fa-users"></i> Users
+    <i class="fa fa-shopping-cart"></i> Orders
 </h1>
 @endsection
 
 @section('breadcrumb')
 <li><a href="#">Dashboard</a></li>
-<li class="active">Users</li>
+<li class="active">Orders</li>
 @endsection
 
 @section('content')
@@ -22,17 +22,17 @@
                             <h3>Cari</h3>
                         </div>
                         <div class="x_content">
-                            <form class="form-inline" action="{{ route('users.index') }}" method="get">
+                            <form class="form-inline" action="{{ route('orders.index') }}" method="get">
                                 <div class="form-group">
                                     <input type="text" name="name" placeholder="Name" value="{{ Request::get('name') }}" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email" placeholder="Email" value="{{ Request::get('email') }}" class="form-control">
+                                    <input type="text" name="product" placeholder="Product" value="{{ Request::get('product') }}" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-search"><i class="fa fa-search"></i> </button>
                                 </div>
-                                <a href="{{ route('users.index') }}" class="btn btn-info btn-search pull-right"><i class="fa fa-database"></i> Tampilkan Semua</a>
+                                <a href="{{ route('orders.index') }}" class="btn btn-info btn-search pull-right"><i class="fa fa-database"></i> Tampilkan Semua</a>
                             </form>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                 <div class="box-body">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h3>List Users
+                            <h3>List Orders
                            
                             <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add New
                             </a>
@@ -59,22 +59,23 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nama</th>
-                                        <th>Email</th>
+                                        <th>Date Order</th>
+                                        <th>User</th>
+                                        <th>Product</th>
                                         <th></th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @foreach($users as $user)
+                                    @foreach($data['orders'] as $order)
                                     <tr>
-                                        <td>{{$number++}}</td>
-                                        <td>{{$user->name}}</td>
-                                        <td>{{$user->email}}</td>
+                                        <td></td>
+                                        <td>{{date('d-m-Y', strtotime($order->created_at))}}</td>
+                                        <td>{{$order->user->name}}</td>
+                                        <td>{{$order->product->name}}</td>
                                         <td class="text-center">
-                                        <a href="{{ route('users.show', ['id' => $user->id]) }}" class="btn btn-xs btn-info"><i class="fa fa-info"></i> Detail</a>
-                                        <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</a>
-                                        <a onclick="return confirm('Delete this data ?')" href="{{ route('users.delete', ['id' => $user->id]) }}" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                                        <a href="{{ route('orders.edit', ['id' => $order->id]) }}" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> Edit</a>
+                                        <a onclick="return confirm('Delete this data ?')" href="{{ route('orders.delete', ['id' => $order->id]) }}" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -82,7 +83,6 @@
                                 </table>
                                 <div class="clearfix"></div>
                                 <div class="text-center">
-                                    {!! $users->appends(request()->all())->links() !!}
                                 </div>
                             </div>
                         </div>

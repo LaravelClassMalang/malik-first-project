@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Order;
+use App\Product;
 
 class UserController extends Controller
 {
@@ -69,7 +71,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        // GET data by id
+        $user["user"] = User::find($id);
+        // $data["user"] = User::with('orders')->get();
+        // Return view
+        return view('users.show', compact('user'));
     }
     /**
      * Show the form for editing the specified resource.

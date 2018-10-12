@@ -38,6 +38,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <link rel="icon" type="image/png" href="{{ url('logo.ico') }}">
+  <link rel="stylesheet" href="{{asset('css/profile.css')}}">
   <style type="text/css">
     .disabled {
        pointer-events: none;
@@ -81,8 +82,8 @@
               <!-- User image -->
               <li class="user-header">
                 <p>
-                  Ahmad Fatoni<br> Mentor
-                  <small>fatoni@dot-indonesia.com</small>
+                  Mohammad Malik<br> Student
+                  <small>malikabdulaziz51@gmail.com</small>
                 </p>
               </li>
               </li>

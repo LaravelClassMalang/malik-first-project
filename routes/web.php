@@ -16,16 +16,19 @@
 // });
 
 
+Route::resource('users', 'UserController', ['except' => ['destroy'] ]);
+
 // GET
-Route::get('/users', "UserController@index")->name("users.index");
+// Route::get('/users', "UserController@index")->name("users.index");
+// Route::get('/users/{id}', "UserController@show")->name("users.show");
 
-// CREATE
-Route::get('/users/create', "UserController@create")->name("users.create");
-Route::post('/users', "UserController@store")->name("users.store");
+// // CREATE
+// Route::get('/users/create', "UserController@create")->name("users.create");
+// Route::post('/users', "UserController@store")->name("users.store");
 
-// CREATE
-Route::get('/users/{id}', "UserController@edit")->name("users.edit");
-Route::put('/users/{id}', "UserController@update")->name("users.update");
+// // CREATE
+// Route::get('/users/{id}', "UserController@edit")->name("users.edit");
+// Route::put('/users/{id}', "UserController@update")->name("users.update");
 
 // DELETE
 Route::get('/users/{users}/delete', ['as' => 'users.delete', 'uses' => 'UserController@destroy']);
@@ -36,5 +39,8 @@ Route::middleware("localization")->group(function() {
 	Route::resource("products", "ProductController", ['except' => ['destroy'] ]);
 	Route::get('products/{products}/delete', ['as' => 'products.delete', 'uses' => 'ProductController@destroy']);
 });
+
+Route::resource("orders", "OrderController", ['except' => ['destroy'] ]);
+Route::get('orders/{orders}/delete', ['as' => 'orders.delete', 'uses' => 'OrderController@destroy']);
 
 
